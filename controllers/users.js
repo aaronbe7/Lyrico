@@ -4,7 +4,8 @@ const SECRET = process.env.SECRET;
 
 module.exports = {
   signup,
-  login
+  login,
+  library
 };
 
 async function signup(req, res) {
@@ -36,6 +37,15 @@ async function login(req, res) {
     });
   } catch (err) {
     return res.status(401).json(err);
+  }
+}
+
+async function library(req, res) {
+  try {
+    const user = await User.findOne({username: req.params.username})
+    res.status(200).json({user: user})
+  } catch(err){
+    return res.status(401).json(err)
   }
 }
 

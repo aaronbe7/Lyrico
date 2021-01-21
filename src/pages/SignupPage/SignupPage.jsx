@@ -2,6 +2,7 @@ import React, {useState, useRef, useEffect } from 'react';
 import './SignupPage.css';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 import { useForm } from '../../hooks/useForm';
+import { useHistory } from 'react-router-dom';
 import userService from '../../utils/userService';
 
 export default function SignUpPage(props){
@@ -14,7 +15,7 @@ export default function SignUpPage(props){
         passwordConf: ''    
     })
    
-
+    const history = useHistory();
     const formRef = useRef();
 
     useEffect(() => {
@@ -32,6 +33,8 @@ export default function SignUpPage(props){
             try {
                 await userService.signup(state);
                 // Route to wherever you want!
+                props.handleSignUpOrLogin()
+                history.push('/')
                 alert("You're logged in! Time to Code where you want to go Now! ~ SignupComponent")
               } catch (err) {
                 // Invalid user data (probably duplicate email)
