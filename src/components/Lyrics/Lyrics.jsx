@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default function PageLyrics(){
+export default function PageLyrics({song}){
     return (
        <div>
-           Lyrics
+           <span>{song.lyrics}</span>
        </div>
     )
 }

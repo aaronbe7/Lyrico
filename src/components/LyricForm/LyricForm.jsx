@@ -1,4 +1,3 @@
-import { PromiseProvider } from 'mongoose';
 import React, {useState} from 'react';
 
 export default function LyricsForm({props}){
@@ -8,14 +7,20 @@ export default function LyricsForm({props}){
     })
 
     const handleSubmit= e => {
-        e.preventDefault();
         props.handleSubmit(songObj)
-        setSongObj('')
+        setSongObj({
+            songTitle: '',
+            songArtist: '',
+        })
     }
 
     const handleChange = e => {
-        const songInfo =  e.target.value
-        setSongObj(songInfo)
+        const title =  e.target.value
+        const artist =  e.target.value
+        setSongObj({
+            songTitle: (title),
+            songArtist: (artist),
+        })
       };
 
     return (
@@ -24,10 +29,10 @@ export default function LyricsForm({props}){
        <h4>Search for Lyrics</h4>
             <div>
               <input
-                type="title"
-                name="title"
-                placeholder="Song Title"
-                value={ songObj.title}
+                type="artist"
+                name="artist"
+                placeholder="Song Artist"
+                value={ songObj.songArtist}
                 onChange={handleChange}
                 required
               />
@@ -36,15 +41,14 @@ export default function LyricsForm({props}){
               <input
                 type="title"
                 name="title"
-                placeholder="Song Artist"
-                value={ songObj.artist}
+                placeholder="Song Title"
+                value={ songObj.songTitle}
                 onChange={handleChange}
                 required
               />
             </div>
             <button
               type="submit"
-              className="btn"
             >
               Search
             </button>
