@@ -1,39 +1,41 @@
 import React, { useEffect, useState } from 'react';
 import PageHeader from '../../components/Header/Header';
 import PageLyrics from '../../components/Lyrics/Lyrics';
-import LyricsForm from '../../components/LyricForm/LyricForm';
+import LyricForm from '../../components/LyricForm/LyricForm';
 import {  Grid } from 'semantic-ui-react';
 
 export default function SearchPage({user, handleLogout}){  
   const [songLyrics, setSongLyrics] = useState('');
-  const [songTitle, setSongTitle] = useState('');
-  const [songArtist, setSongArtist] = useState('');
+  const [songTitle, setSongTitle] = useState('')
+  const [songArtist, setSongArtist] = useState('')
 
-  const handleSubmit = (title, artist) => {
-    setSongTitle(title);
-    setSongArtist(artist);
+  const handleSubmit = ({songTitle, songArtist}) => {
+    console.log('hitting searchpage handlesubmit', songTitle, songArtist)
+    setSongTitle(songTitle);
+    setSongArtist(songArtist);
   }
 
   useEffect(() => {
-    const songUrl = `https://private-anon-3bd572acf7-lyricsovh.apiary-proxy.com/v1/${songArtist}/${songTitle}`
+    const songUrl = `https://private-anon-3bd572acf7-lyricsovh.apiary-proxy.com/v1/${songArtist}/${songTitle}`;
     fetch(songUrl)
     .then((res) => res.json())
     .then((data) => {
+      console.log(data);
       setSongLyrics(data);
     })
-  });
+  }, [songTitle, songArtist]);
 
     return ( 
-        <Grid centered >
+        <Grid >
         <Grid.Row>
           <Grid.Column>
             <PageHeader user={user} handleLogout={handleLogout}/>
           </Grid.Column>
         </Grid.Row>
-        <Grid.Row>
-          <Grid.Column>
+        <Grid.Row centered columns={2}>
+          <Grid.Column >
+            <LyricForm handleSubmit={handleSubmit}/>
           </Grid.Column>
-            <LyricsForm handleSubmit={handleSubmit}/>
           <Grid.Column>
             <PageLyrics song={songLyrics}/>
           </Grid.Column>
