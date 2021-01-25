@@ -2,8 +2,9 @@ import React, { useState, useRef, useEffect } from 'react';
 import './LoginPage.css';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 import { useForm } from '../../hooks/useForm';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import userService from '../../utils/userService';
+import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 
 export default function LoginPage(props){
     const [invalidForm, setValidForm] = useState(false);
@@ -16,14 +17,14 @@ export default function LoginPage(props){
     const history = useHistory();
     const formRef = useRef();
 
-    useEffect(() => {
-      formRef.current.checkValidity() ? setValidForm(false) : setValidForm(true);
-    });
-
     return (
         <>
-          <h1>Login</h1>
-          <form  autoComplete="off" ref={formRef} onSubmit={async (e) => {
+        <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+            <Grid.Column style={{ maxWidth: 450 }}>
+            <Header as='h2' color='violet' textAlign='center'>
+            Login
+            </Header>
+          <Form  autoComplete="off" ref={formRef} onSubmit={async (e) => {
             e.preventDefault()
             
             try {
@@ -37,38 +38,46 @@ export default function LoginPage(props){
                 setError(err.message)
               }
           }}>
+            <Segment >
             <div className="form-group">
-              <input
+              <Form.Input
                 type="email"
                 className="form-control"
                 name="email"
-                placeholder="email"
+                placeholder="Email"
                 value={ state.email}
                 onChange={handleChange}
                 required
               />
             </div>
             <div className="form-group">
-              <input
+              <Form.Input
                 className="form-control"
                 name="pw"
                 type="password"
-                placeholder="password"
+                placeholder="Password"
                 value={ state.password}
                 onChange={handleChange}
                 required
               />
             </div>
-            <button
+            <br />
+            <Button
               type="submit"
               className="btn"
               disabled={invalidForm}
+              color='violet'
             >
               Login
-            </button>
-          </form>
-
+            </Button>
+            </Segment>
+          </Form>
+          <Message>
+              New here? <Link to='/signup'>Sign Up</Link>
+            </Message>
           {error ? <ErrorMessage error={error} /> : null}
+          </Grid.Column>
+          </Grid>
         </>
       );
 }

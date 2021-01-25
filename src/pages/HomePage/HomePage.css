@@ -1,0 +1,20 @@
+.homePage {
+    text-align: left;
+    margin-top: 50px;
+    margin-left: 50px;
+}
+
+.welcome1 {
+    font-size: 80px;
+    color: rgb(255, 255, 255);
+}
+
+.welcome2 {
+    font-size: 80px;
+    color: rgb(236, 179, 255);
+}
+
+.background {
+    min-height: 1000px;
+    background-image: linear-gradient(to bottom right, #9d46ff, #4b23ff);
+}

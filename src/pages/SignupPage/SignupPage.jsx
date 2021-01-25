@@ -2,8 +2,9 @@ import React, {useState, useRef, useEffect } from 'react';
 import './SignupPage.css';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 import { useForm } from '../../hooks/useForm';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import userService from '../../utils/userService';
+import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 
 export default function SignUpPage(props){
     const [invalidForm, setValidForm] = useState(false);
@@ -18,16 +19,15 @@ export default function SignUpPage(props){
     const history = useHistory();
     const formRef = useRef();
 
-    useEffect(() => {
-      formRef.current.checkValidity() ? setValidForm(false) : setValidForm(true);
-    });
-
-
 
     return (
         <>
-          <h1>Sign Up</h1>
-          <form  autoComplete="off" ref={formRef} onSubmit={async (e) => {
+         <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+            <Grid.Column style={{ maxWidth: 450 }}>
+            <Header as='h2' color='violet' textAlign='center'>
+            Sign Up
+            </Header>
+          <Form  autoComplete="off" ref={formRef} onSubmit={async (e) => {
             e.preventDefault()
             console.log(state, ' this is state')
             try {
@@ -42,6 +42,7 @@ export default function SignUpPage(props){
                 setError(err.message)
               }
           }}>
+            <Segment>
             <div className="form-group">
               <input
                 className="form-control"
@@ -85,16 +86,23 @@ export default function SignUpPage(props){
                 required
               />
             </div>
-            <button
+            <br />
+            <Button
               type="submit"
               className="btn"
               disabled={invalidForm}
+              color='violet'
             >
               Signup
-            </button>
-          </form>
-
+            </Button>
+            </Segment>
+          </Form>
+          <Message>
+              Have an account? <Link to='/login'>Login</Link>
+            </Message>
           {error ? <ErrorMessage error={error} /> : null}
+          </Grid.Column>
+          </Grid>
         </>
       );
 }

@@ -1,0 +1,17 @@
+h1 {
+    font-size: 100px;
+    color: #5B45FF;
+}
+
+h2 {
+    font-size: 60px;
+    color: #a371ff;
+}
+
+.songInfo {
+    margin-top: 20px;
+}
+
+.songForm {
+    margin-top: 200px;
+}
