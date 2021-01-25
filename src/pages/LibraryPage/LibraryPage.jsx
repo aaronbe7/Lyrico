@@ -4,6 +4,7 @@ import SongFeed from '../../components/SongFeed/SongFeed'
 import SaveSongForm from '../../components/SaveSongForm/SaveSongForm'
 import {  Grid } from 'semantic-ui-react';
 import userService from '../../utils/userService';
+import * as songsAPI from '../../utils/songService';
 import { useLocation } from 'react-router-dom';
 
 export default function LibraryPage({ user, handleLogout }){
@@ -11,6 +12,7 @@ export default function LibraryPage({ user, handleLogout }){
     const [libUser, setLibUser] = useState({})
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState('')
+    const[songs, setSongs] = useState([])
 
     const location = useLocation();
 
@@ -26,8 +28,25 @@ export default function LibraryPage({ user, handleLogout }){
             setError(err)
         }
     }
-    
+
+    async function handleSaveSong (song){
+        console.log('we are here', song)
+        const data = await songsAPI.create(song);
+        setSongs([...songs, data.song])
+      }
+
+    async function getSongs(){
+        console.log('get songs here')
+    try {
+        const data = await songsAPI.getAll();
+        setSongs([...data.songs])
+    } catch(err){
+        console.log(err, ' this is the error')
+    }
+    }
+
     useEffect(() => {
+        getSongs()
         getLibrary()
     }, [])
 
@@ -37,19 +56,19 @@ export default function LibraryPage({ user, handleLogout }){
         { loading ?
             <h1>Loading......</h1>
             :
-                <Grid>
+                <Grid >
                 <Grid.Row>
                 <Grid.Column>
                     <PageHeader user={user} handleLogout={handleLogout} />
                 </Grid.Column>
                 </Grid.Row>
-                <Grid.Row>
+                <Grid.Row >
                     <Grid.Column width={6}>
                         <Grid.Row >
-                            <SaveSongForm />
+                            <SaveSongForm handleSaveSong={handleSaveSong}/>
                         </Grid.Row>
-                        <Grid.Row>
-                            <SongFeed />
+                        <Grid.Row >
+                            <SongFeed songs={songs} numCol={2} user={user}/>
                         </Grid.Row>
                     </Grid.Column>
                     <Grid.Column>

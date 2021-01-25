@@ -1,10 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import './LoginPage.css';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 import { useForm } from '../../hooks/useForm';
 import { useHistory, Link } from 'react-router-dom';
 import userService from '../../utils/userService';
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
 
 export default function LoginPage(props){
     const [invalidForm, setValidForm] = useState(false);

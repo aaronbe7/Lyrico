@@ -1,8 +1,16 @@
 import React from 'react';
+import { Card  } from 'semantic-ui-react'
+import SavedSong from '../SavedSong/SavedSong';
 
-export default function SongFeed(props){
+export default function SongFeed({songs, user, numCol}){
 
     return (
-       <div>THIS IS THE SONG FEED THAT WILL RENDER OUT EACH SONG</div>
+        <Card.Group itemsPerRow={numCol} >
+                {songs.map((song) => {
+                return ( 
+                        <SavedSong song={song} key={song._id} user={user}/>
+                    )
+                })}
+        </Card.Group>
     )
 }

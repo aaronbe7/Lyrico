@@ -1,20 +1,11 @@
 import React, {useState} from 'react';
+import { Button, Form, Grid, Header } from 'semantic-ui-react'
 
-export default function LyricForm(props){
+export default function SaveSongForm(props){
     const [songTitle, setSongTitle] = useState('')
     const [songArtist, setSongArtist] = useState('')
 
-    const handleSubmit= e => {
-        e.preventDefault();
-        console.log('this is props', props)
-        console.log('handleSubmit clicked');
-        props.handleSubmit({songTitle, songArtist})
-        setSongTitle(songTitle)
-        setSongArtist(songArtist)
-    };
-
     const handleChange = e => {
-        console.log('handleChange clicked');
         if (e.target.name === 'artist' ) {
             setSongArtist(e.target.value)
         } else if (e.target.name === 'title') {
@@ -22,12 +13,22 @@ export default function LyricForm(props){
         }
       };
 
+    const handleSubmit= e => {
+        e.preventDefault();
+        props.handleSaveSong({songTitle, songArtist}); // calling our function!
+    };
+
+
     return (
        <>
-        <form onSubmit={handleSubmit}>
-       <h4>Search for Lyrics</h4>
+        <Grid textAlign='center' verticalAlign='middle'>
+            <Grid.Column style={{ maxWidth: 450 }}>
+            <Header as='h3' color='violet' textAlign='center'>
+            Save Song
+            </Header>
+        <Form onSubmit={handleSubmit}>
             <div>
-              <input
+              <Form.Input
                 type="artist"
                 name="artist"
                 placeholder="Song Artist"
@@ -37,7 +38,7 @@ export default function LyricForm(props){
               />
             </div>
             <div>
-              <input
+              <Form.Input
                 type="title"
                 name="title"
                 placeholder="Song Title"
@@ -46,12 +47,15 @@ export default function LyricForm(props){
                 required
               />
             </div>
-            <button
+            <br />
+            <Button
               type="submit"
             >
-              Search
-            </button>
-        </form>
+              Save
+            </Button>
+        </Form>
+        </Grid.Column>
+        </Grid>
        </>
     )
 }

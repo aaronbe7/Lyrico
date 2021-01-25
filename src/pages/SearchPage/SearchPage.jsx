@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PageHeader from '../../components/Header/Header';
 import PageLyrics from '../../components/Lyrics/Lyrics';
 import LyricForm from '../../components/LyricForm/LyricForm';
-import {  Grid, GridRow, Segment } from 'semantic-ui-react';
+import {  Grid, Segment } from 'semantic-ui-react';
 import './SearchPage.css';
 
 export default function SearchPage({user, handleLogout}){  
@@ -35,12 +35,12 @@ export default function SearchPage({user, handleLogout}){
         </Grid.Row>
         <Grid.Row centered columns={2}>
           <Grid.Column textAlign='center' verticalAlign='middle'>
+            <Grid.Row className="songForm">
+            <LyricForm handleSubmit={handleSubmit}/>
+            </Grid.Row>
             <Grid.Row className="songInfo">
               <h1>{songArtist}</h1>
               { songTitle ? <h2>"{songTitle}"</h2> : null}
-            </Grid.Row>
-            <Grid.Row className="songForm">
-            <LyricForm handleSubmit={handleSubmit}/>
             </Grid.Row>
           </Grid.Column>
           <Grid.Column style={{ maxWidth: 700 }}>
