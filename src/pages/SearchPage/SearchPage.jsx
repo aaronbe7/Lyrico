@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PageHeader from '../../components/Header/Header';
 import PageLyrics from '../../components/Lyrics/Lyrics';
 import LyricForm from '../../components/LyricForm/LyricForm';
-import {  Grid } from 'semantic-ui-react';
+import {  Grid, GridRow } from 'semantic-ui-react';
 
 export default function SearchPage({user, handleLogout}){  
   const [songLyrics, setSongLyrics] = useState('');
@@ -34,7 +34,14 @@ export default function SearchPage({user, handleLogout}){
         </Grid.Row>
         <Grid.Row centered columns={2}>
           <Grid.Column >
+            <Grid.Row>
+              {songArtist}
+              <br />
+              {songTitle}
+            </Grid.Row>
+            <Grid.Row>
             <LyricForm handleSubmit={handleSubmit}/>
+            </Grid.Row>
           </Grid.Column>
           <Grid.Column>
             <PageLyrics song={songLyrics}/>

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PageHeader from '../../components/Header/Header';
+import SongFeed from '../../components/SongFeed/SongFeed'
+import SaveSongForm from '../../components/SaveSongForm/SaveSongForm'
 import {  Grid } from 'semantic-ui-react';
 import userService from '../../utils/userService';
 import { useLocation } from 'react-router-dom';
@@ -40,6 +42,19 @@ export default function LibraryPage({ user, handleLogout }){
                 <Grid.Column>
                     <PageHeader user={user} handleLogout={handleLogout} />
                 </Grid.Column>
+                </Grid.Row>
+                <Grid.Row>
+                    <Grid.Column>
+                        <Grid.Row>
+                            <SaveSongForm />
+                        </Grid.Row>
+                        <Grid.Row>
+                            <SongFeed />
+                        </Grid.Row>
+                    </Grid.Column>
+                    <Grid.Column>
+
+                    </Grid.Column>
                 </Grid.Row>
             </Grid>
             }
