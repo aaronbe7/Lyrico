@@ -1,9 +1,10 @@
 import React from 'react';
-import { Card, Form, Button, Icon, Image, Feed } from 'semantic-ui-react'
+import { Card, Button } from 'semantic-ui-react'
 
-function SavedSong({song, removeSong }) { 
+function SavedSong({song, removeSong}) { 
 
-    const handleSubmit= e => {
+    const clickHandler= e => {
+        removeSong(song)
     };
 
   return (
@@ -14,13 +15,10 @@ function SavedSong({song, removeSong }) {
         <br />
         {song.title}
       </Card.Description>
-      <br />
-      <Form onSubmit={handleSubmit}>
-      <Button type="submit">
+      </Card.Content>
+      <Button onClick={clickHandler}>
           X
       </Button>
-      </Form>
-      </Card.Content>
     </Card>
   );
 }

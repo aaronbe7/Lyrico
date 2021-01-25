@@ -12,7 +12,7 @@ export default function LibraryPage({ user, handleLogout }){
     const [libUser, setLibUser] = useState({})
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState('')
-    const[songs, setSongs] = useState([])
+    const [songs, setSongs] = useState([])
 
     const location = useLocation();
 
@@ -30,19 +30,26 @@ export default function LibraryPage({ user, handleLogout }){
     }
 
     async function handleSaveSong (song){
-        console.log('we are here', song)
         const data = await songsAPI.create(song);
         setSongs([...songs, data.song])
       }
 
     async function getSongs(){
-        console.log('get songs here')
     try {
         const data = await songsAPI.getAll();
         setSongs([...data.songs])
     } catch(err){
         console.log(err, ' this is the error')
     }
+    }
+
+    async function removeSong(song){
+        try {
+            await songsAPI.removeSong(song);
+            getSongs()
+        } catch(err) {
+        console.log(err)
+        }
     }
 
     useEffect(() => {
@@ -68,7 +75,7 @@ export default function LibraryPage({ user, handleLogout }){
                             <SaveSongForm handleSaveSong={handleSaveSong}/>
                         </Grid.Row>
                         <Grid.Row >
-                            <SongFeed songs={songs} numCol={2} user={user}/>
+                            <SongFeed songs={songs} numCol={2} user={user} removeSong={removeSong}/>
                         </Grid.Row>
                     </Grid.Column>
                     <Grid.Column>

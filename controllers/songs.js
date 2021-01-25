@@ -27,9 +27,11 @@ async function index(req, res){
 }
 
 async function deleteSong(req, res){
-    console.log('we are here', req.body)
+    console.log(req.params)
     try {
-        const song = await Song.remove({title: req.body.songTitle, artist: req.body.songArtist, user: req.user});
+        const song = await Song.findByIdAndDelete(req.params.id);
+        // song.remove(req.params._id)
+        console.log(song, 'this is song')
         res.status(201).json({song: song})
     } catch(err){
         console.log(err)

@@ -4,7 +4,7 @@ const songsCtrl = require('../../controllers/songs');
 // /*---------- Public Routes ----------*/
 router.post('/', songsCtrl.create);
 router.get('/', songsCtrl.index)
-router.delete('/songs/:id', songsCtrl.deleteSong)
+router.delete('/:id', songsCtrl.deleteSong)
 
 
 /*---------- Protected Routes ----------*/

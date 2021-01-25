@@ -24,11 +24,12 @@ export function create(song) {
     .then(res => res.json());
   }
 
-  export function removeSong(){
-    return fetch(BASE_URL, {
+  export function removeSong(song){
+    return fetch(`${BASE_URL}/${song._id}`, {
         method: 'DELETE',
         headers: {
-            'Authorization': 'Bearer ' + tokenService.getToken()
+            'Authorization': 'Bearer ' + tokenService.getToken(),
+            'Content-Type': 'application/json',
           }
     }).then(res => res.json());
 }
