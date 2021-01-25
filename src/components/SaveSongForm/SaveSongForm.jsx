@@ -1,58 +1,57 @@
 import React, {useState} from 'react';
-import { Button, Form, Segment } from 'semantic-ui-react'
 
-export default function SaveSongForm(props){
-    const [state, setState] = useState({
-        title: '',
-        artist: '',
-    })
-
-    const handleChange = e => {
-        setState({
-            ...state,
-            [e.target.name]: e.target.value
-          })
-      };
+export default function LyricForm(props){
+    const [songTitle, setSongTitle] = useState('')
+    const [songArtist, setSongArtist] = useState('')
 
     const handleSubmit= e => {
         e.preventDefault();
-        const formData = new FormData()
-        formData.append('title', state.title)
-        formData.append('title', state.artist)
-        props.handleSaveSong(formData)
+        console.log('this is props', props)
+        console.log('handleSubmit clicked');
+        props.handleSubmit({songTitle, songArtist})
+        setSongTitle(songTitle)
+        setSongArtist(songArtist)
     };
 
+    const handleChange = e => {
+        console.log('handleChange clicked');
+        if (e.target.name === 'artist' ) {
+            setSongArtist(e.target.value)
+        } else if (e.target.name === 'title') {
+            setSongTitle(e.target.value)
+        }
+      };
 
     return (
-       <Segment>
-        <Form onSubmit={handleSubmit}>
-       <h4>Save Lyrics</h4>
+       <>
+        <form onSubmit={handleSubmit}>
+       <h4>Search for Lyrics</h4>
             <div>
-              <Form.Input
+              <input
                 type="artist"
                 name="artist"
                 placeholder="Song Artist"
-                value={state.artist}
+                value={songArtist}
                 onChange={handleChange}
                 required
               />
             </div>
             <div>
-              <Form.Input
+              <input
                 type="title"
                 name="title"
                 placeholder="Song Title"
-                value={state.title}
+                value={songTitle}
                 onChange={handleChange}
                 required
               />
             </div>
-            <Button
+            <button
               type="submit"
             >
-              Save
-            </Button>
-        </Form>
-       </Segment>
+              Search
+            </button>
+        </form>
+       </>
     )
 }

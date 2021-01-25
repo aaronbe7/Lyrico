@@ -5,14 +5,12 @@ import SaveSongForm from '../../components/SaveSongForm/SaveSongForm'
 import {  Grid } from 'semantic-ui-react';
 import userService from '../../utils/userService';
 import { useLocation } from 'react-router-dom';
-import * as songsAPI from '../../utils/songService';
 
 export default function LibraryPage({ user, handleLogout }){
 
     const [libUser, setLibUser] = useState({})
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState('')
-    const [songs, setsongs] = useState([])
 
     const location = useLocation();
 
@@ -34,14 +32,6 @@ export default function LibraryPage({ user, handleLogout }){
     }, [])
 
 
-    async function handleSaveSong (song){
-        
-        const data = await songsAPI.create(song);
-        console.log(data)
-    }
-      
-
-
     return ( 
         <>
         { loading ?
@@ -56,7 +46,7 @@ export default function LibraryPage({ user, handleLogout }){
                 <Grid.Row>
                     <Grid.Column width={6}>
                         <Grid.Row >
-                            <SaveSongForm handleSaveSong={handleSaveSong}/>
+                            <SaveSongForm />
                         </Grid.Row>
                         <Grid.Row>
                             <SongFeed />
