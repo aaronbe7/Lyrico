@@ -82,32 +82,28 @@ export default function LibraryPage({ user, handleLogout }){
 
     return ( 
         <>
-        { loading ?
-            <h1>Loading......</h1>
-            :
-                <Grid >
-                <Grid.Row>
-                <Grid.Column>
-                    <PageHeader user={user} handleLogout={handleLogout} />
+            <Grid >
+            <Grid.Row>
+            <Grid.Column>
+                <PageHeader user={user} handleLogout={handleLogout} />
+            </Grid.Column>
+            </Grid.Row>
+            <Grid.Row centered columns={2}>
+                <Grid.Column width={6}>
+                    <Grid.Row >
+                        <SaveSongForm handleSaveSong={handleSaveSong}/>
+                    </Grid.Row>
+                    <Grid.Row >
+                        <SongFeed songs={songs} numCol={2} user={user} removeSong={removeSong} handleSubmit={handleSubmit}/>
+                    </Grid.Row>
                 </Grid.Column>
-                </Grid.Row>
-                <Grid.Row centered columns={2}>
-                    <Grid.Column width={6}>
-                        <Grid.Row >
-                            <SaveSongForm handleSaveSong={handleSaveSong}/>
-                        </Grid.Row>
-                        <Grid.Row >
-                            <SongFeed songs={songs} numCol={2} user={user} removeSong={removeSong} handleSubmit={handleSubmit}/>
-                        </Grid.Row>
-                    </Grid.Column>
-                    <Grid.Column style={{ maxWidth: 700 }}>
-                            {songLyrics ? <Segment>
-                            <PageLyrics song={songLyrics}/>
-                         </Segment> : null}
-                    </Grid.Column>
-                </Grid.Row>
+                <Grid.Column style={{ maxWidth: 700 }}>
+                        {songLyrics ? <Segment>
+                        <PageLyrics song={songLyrics}/>
+                        </Segment> : null}
+                </Grid.Column>
+            </Grid.Row>
             </Grid>
-            }
         </>
     )
 }
