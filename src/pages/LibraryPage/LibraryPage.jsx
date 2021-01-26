@@ -23,6 +23,7 @@ export default function LibraryPage({ user, handleLogout }){
 
             const data = await userService.getLibrary(user.username);
             setLoading(() => false)
+            setSongs(() => [...data.songs])
             setLibUser(() => setLibUser(data.user))
         } catch(err){
             setError(err)

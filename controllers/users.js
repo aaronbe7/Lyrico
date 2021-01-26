@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Song = require('../models/song');
 const jwt = require('jsonwebtoken');
 const SECRET = process.env.SECRET;
 
@@ -43,7 +44,8 @@ async function login(req, res) {
 async function library(req, res) {
   try {
     const user = await User.findOne({username: req.params.username})
-    res.status(200).json({user: user})
+    const songs = await Song.find({user: user._id});
+    res.status(200).json({songs:songs, user: user})
   } catch(err){
     return res.status(401).json(err)
   }
