@@ -1,16 +1,26 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Card, Button } from 'semantic-ui-react'
+import './SavedSong.css';
 
-function SavedSong({song, removeSong}) { 
+function SavedSong({song, removeSong, handleSubmit}) { 
+    const [songTitle, setSongTitle] = useState('')
+    const [songArtist, setSongArtist] = useState('')
+
+    const handleSubmitter= e => {
+        e.preventDefault();
+        handleSubmit({songTitle, songArtist})
+        setSongTitle(song.title)
+        setSongArtist(song.artist)
+    };
 
     const clickHandler= e => {
         removeSong(song)
     };
 
   return (
-    <Card key={song._id} centered>
+    <Card onClick={handleSubmitter} key={song._id} >
       <Card.Content>
-      <Card.Description>
+      <Card.Description className="card">
         {song.artist}
         <br />
         {song.title}

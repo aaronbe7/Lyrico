@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PageHeader from '../../components/Header/Header';
 import SongFeed from '../../components/SongFeed/SongFeed'
 import SaveSongForm from '../../components/SaveSongForm/SaveSongForm'
-import {  Grid } from 'semantic-ui-react';
+import PageLyrics from '../../components/Lyrics/Lyrics';
+import {  Grid, Segment } from 'semantic-ui-react';
 import userService from '../../utils/userService';
 import * as songsAPI from '../../utils/songService';
 import { useLocation } from 'react-router-dom';
@@ -13,6 +14,15 @@ export default function LibraryPage({ user, handleLogout }){
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState('')
     const [songs, setSongs] = useState([])
+    const [songLyrics, setSongLyrics] = useState('');
+    const [songTitle, setSongTitle] = useState('')
+    const [songArtist, setSongArtist] = useState('')
+
+    const handleSubmit = ({songTitle, songArtist}) => {
+        console.log('hitting searchpage handlesubmit', songTitle, songArtist)
+        setSongTitle(songTitle);
+        setSongArtist(songArtist);
+    }
 
     const location = useLocation();
 
@@ -47,7 +57,8 @@ export default function LibraryPage({ user, handleLogout }){
     async function removeSong(song){
         try {
             await songsAPI.removeSong(song);
-            getSongs()
+            const data = await userService.getLibrary(user.username);
+            setSongs(() => [...data.songs])
         } catch(err) {
         console.log(err)
         }
@@ -57,6 +68,16 @@ export default function LibraryPage({ user, handleLogout }){
         getSongs()
         getLibrary()
     }, [])
+
+    useEffect(() => {
+        const songUrl = `https://private-anon-3bd572acf7-lyricsovh.apiary-proxy.com/v1/${songArtist}/${songTitle}`;
+        fetch(songUrl)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setSongLyrics(data);
+        })
+      }, [songTitle, songArtist]);
 
 
     return ( 
@@ -70,17 +91,19 @@ export default function LibraryPage({ user, handleLogout }){
                     <PageHeader user={user} handleLogout={handleLogout} />
                 </Grid.Column>
                 </Grid.Row>
-                <Grid.Row >
+                <Grid.Row centered columns={2}>
                     <Grid.Column width={6}>
                         <Grid.Row >
                             <SaveSongForm handleSaveSong={handleSaveSong}/>
                         </Grid.Row>
                         <Grid.Row >
-                            <SongFeed songs={songs} numCol={2} user={user} removeSong={removeSong}/>
+                            <SongFeed songs={songs} numCol={2} user={user} removeSong={removeSong} handleSubmit={handleSubmit}/>
                         </Grid.Row>
                     </Grid.Column>
-                    <Grid.Column>
-
+                    <Grid.Column style={{ maxWidth: 700 }}>
+                            {songLyrics ? <Segment>
+                            <PageLyrics song={songLyrics}/>
+                         </Segment> : null}
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
