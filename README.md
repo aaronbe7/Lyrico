@@ -26,5 +26,5 @@ Trello: https://trello.com/b/8FMVUKVH/project-4-lyrico
 
 # Next Steps
 * Users can use a search bar for more flexibility when finding songs
-* More loads with the lyrics
+* More data loads with the lyrics
   * Youtube video, release year, etc
