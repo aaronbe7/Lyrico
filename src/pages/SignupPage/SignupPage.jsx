@@ -29,7 +29,6 @@ export default function SignUpPage(props){
             </Header>
           <Form  autoComplete="off" ref={formRef} onSubmit={async (e) => {
             e.preventDefault()
-            console.log(state, ' this is state')
             try {
                 await userService.signup(state);
                 // Route to wherever you want!

@@ -4,7 +4,7 @@ export default function PageLyrics({song}){
     console.log(song, " this is lyrics");
     return (
        <div>
-           <span>{song.lyrics}</span>
+           <p>{song.lyrics}</p>
        </div>
     )
 }
