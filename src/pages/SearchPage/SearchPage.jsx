@@ -34,7 +34,7 @@ export default function SearchPage({user, handleLogout}){
           </Grid.Column>
         </Grid.Row>
         <Grid.Row centered columns={2}>
-          <Grid.Column textAlign='center' verticalAlign='middle'>
+          <Grid.Column width={6} textAlign='center' verticalAlign='middle'>
             <Grid.Row className="songForm">
             <LyricForm handleSubmit={handleSubmit}/>
             </Grid.Row>
