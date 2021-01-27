@@ -9,6 +9,7 @@ function signup(user) {
     body: JSON.stringify(user)
   })
   .then(res => {
+    console.log('userservice sign up response', res)
     if (res.ok) return res.json();
     // Probably a duplicate email
     throw new Error('Email already taken!');
