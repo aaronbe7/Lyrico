@@ -14,6 +14,7 @@ Lyrico is an app to find song lyrics. Users can search for songs and save lyrics
 * Express
 * MongoDB
 * Node
+* Lyrics.ovh API
 * JavaScript
 * Heroku
 * CSS
