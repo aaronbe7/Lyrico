@@ -1,6 +1,6 @@
 # Lyrico
 
-Lyrico allows users to find the lyrics to an extensive list of songs. Users can also make an account to easily access the lyrics to songs they save. 
+Lyrico is an app to find song lyrics. Users can search for songs and save lyrics to songs. 
 
 ## Screenshots
 ![Sign Up](src/images/lyricosignup.png)
