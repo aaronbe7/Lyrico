@@ -14,6 +14,7 @@ async function signup(req, res) {
   try {
     await user.save();
     const token = createJWT(user);
+    console.log('try signup controller', user, token)
     res.json({ token });
   } catch (err) {
     // Probably a duplicate email
