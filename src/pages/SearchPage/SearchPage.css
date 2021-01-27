@@ -1,14 +1,13 @@
 h1 {
-    font-size: 100px;
-    color: #5B45FF;
-}
-
-h2 {
-    font-size: 60px;
-    color: #a371ff;
+    font-size: 25px;
+    color: white;
+    display: inline;
+    height: 25px;
 }
 
 .songInfo {
-    margin-top: 20px;
+    margin-top: -25px;
+    background-color: #540aff;
+    height: 60px;
 }
 

@@ -11,10 +11,12 @@
 
 .welcome2 {
     font-size: 80px;
-    color: rgb(236, 179, 255);
+    color: rgb(220, 198, 255);
 }
 
 .background {
-    min-height: 1000px;
-    background-image: linear-gradient(to bottom right, #9d46ff, #4b23ff);
+    width: 100%;
+    min-height:100vh;
+    background-size: cover; 
+    background-size: cover;     background-image: linear-gradient(to bottom right, #9d46ff, #4b23ff);
 }

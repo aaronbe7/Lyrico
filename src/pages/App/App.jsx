@@ -34,14 +34,14 @@ function App() {
           <Route exact path="/signup">
             <SignupPage handleSignUpOrLogin={handleSignUpOrLogin}/>
           </Route>
+          {userService.getUser() ? 
+            <>
           <Route exact path="/">
               <HomePage user={user} handleLogout={handleLogout}/>
           </Route>
           <Route exact path="/search">
               <SearchPage user={user} handleLogout={handleLogout}/>
           </Route>
-          {userService.getUser() ? 
-            <>
                 <Route path="/user/:username">
                     <LibraryPage user={user} handleLogout={handleLogout}/>
                 </Route>

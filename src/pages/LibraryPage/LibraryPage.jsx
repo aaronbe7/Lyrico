@@ -88,6 +88,9 @@ export default function LibraryPage({ user, handleLogout }){
                 <PageHeader user={user} handleLogout={handleLogout} />
             </Grid.Column>
             </Grid.Row>
+            <Grid.Row centered className="songInfo">
+            { songTitle ? <h1> {songArtist}: "{songTitle}" </h1> : null}
+            </Grid.Row>
             <Grid.Row centered columns={2}>
                 <Grid.Column width={6}>
                     <Grid.Row >

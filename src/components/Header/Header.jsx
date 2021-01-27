@@ -1,26 +1,17 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Link } from 'react-router-dom';
 import './Header.css';
 import { Header, Segment, Icon } from 'semantic-ui-react';
 
 
 export default function PageHeader({user, handleLogout}){
-    console.log(user)
+
     return (
         <Segment className="segment" clearing>
             <Header as='h3' floated='right'>
-                { user ?
-                <>
                 <Link to={`/user/${user.username}`} className="link">Library</Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <Link to='/search' className="link">Search</Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <Link to='' onClick={handleLogout} className="link">Logout</Link>
-                </>
-                : 
-                <>
-                <Link to='/search' className="link">Search</Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <Link to='/login' onClick={handleLogout} className="link">Login</Link> 
-                </>
-                }
             </Header>
             <Header as='h3' color="violet" floated='left'>
             <Link to='' className="link">Lyrico</Link>

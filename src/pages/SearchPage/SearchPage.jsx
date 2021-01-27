@@ -33,14 +33,13 @@ export default function SearchPage({user, handleLogout}){
             <PageHeader user={user} handleLogout={handleLogout}/>
           </Grid.Column>
         </Grid.Row>
+        <Grid.Row centered className="songInfo">
+            { songTitle ? <h1> {songArtist}: "{songTitle}" </h1> : null}
+        </Grid.Row>
         <Grid.Row centered columns={2}>
           <Grid.Column width={6} textAlign='center' verticalAlign='middle'>
             <Grid.Row className="songForm">
             <LyricForm handleSubmit={handleSubmit}/>
-            </Grid.Row>
-            <Grid.Row className="songInfo">
-              <h1>{songArtist}</h1>
-              { songTitle ? <h2>"{songTitle}"</h2> : null}
             </Grid.Row>
           </Grid.Column>
           <Grid.Column style={{ maxWidth: 700 }}>

@@ -9,7 +9,7 @@ export default function HomePage({ user, handleLogout }){
     <div className="background">
         <Grid >
         <Grid.Row>
-          <Grid.Column>
+          <Grid.Column >
             <PageHeader user={user} handleLogout={handleLogout}/>
           </Grid.Column>
         </Grid.Row>
