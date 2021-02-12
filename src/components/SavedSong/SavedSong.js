@@ -6,7 +6,7 @@ function SavedSong({song, removeSong, handleSubmit}) {
     const [songTitle, setSongTitle] = useState('')
     const [songArtist, setSongArtist] = useState('')
 
-    const handleSubmitter= e => {
+    const handleSubmitter = async (e) => {
         e.preventDefault();
         handleSubmit({songTitle, songArtist})
         setSongTitle(song.title)
@@ -18,9 +18,9 @@ function SavedSong({song, removeSong, handleSubmit}) {
     };
 
   return (
-    <Card onClick={handleSubmitter} key={song._id} >
+    <Card>
       <Card.Content>
-      <Card.Description className="card">
+      <Card.Description onClick={handleSubmitter} key={song._id} className="card">
         {song.artist}
         <br />
         {song.title}

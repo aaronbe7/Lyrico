@@ -45,15 +45,6 @@ export default function LibraryPage({ user, handleLogout }){
         setSongs([...songs, data.song])
       }
 
-    async function getSongs(){
-    try {
-        const data = await songsAPI.getAll();
-        setSongs([...data.songs])
-    } catch(err){
-        console.log(err, ' this is the error')
-    }
-    }
-
     async function removeSong(song){
         try {
             await songsAPI.removeSong(song);
@@ -65,7 +56,6 @@ export default function LibraryPage({ user, handleLogout }){
     }
 
     useEffect(() => {
-        getSongs()
         getLibrary()
     }, [])
 
